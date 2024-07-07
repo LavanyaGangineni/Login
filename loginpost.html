@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+           width: 100%;
+           height: 100vh;
+           background: url("https://static.vecteezy.com/system/resources/thumbnails/026/365/937/small_2x/beautiful-blurred-green-nature-background-ai-generated-photo.jpg");
+           background-repeat: no-repeat;
+           background-size: cover;
+           background-position: center;
+           opacity: 0.6;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+        }
+        .text1{
+            width: 50%;
+            height: 73vh;
+            font-size: 30px;
+            gap: 20px;
+            background-color: black;
+            color: pink;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+        }
+        .text1 input{
+            width: 200px;
+            font-size: 20px;
+            padding: 5px;
+        }
+        .checkbox{
+            font-size: 20px;
+        }
+        .checkbox input{
+            width: 20px;
+            height: 20px;
+        }
+        button{
+            width: 100px;
+            height: 40px;
+            font-size: 20px;
+            color: black;
+            border-radius: 10%;
+            border: none;
+            cursor: pointer;
+        }
+        .x{
+            border: 3px solid red;
+        }
+        .y{
+            border: 3px solid green;
+        }
+        h1{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="success-message"></h1>
+    
+    <div class="main">
+        
+        <div  action="https://jsonplaceholder.typicode.com/posts " method=post class="text1">
+            <h1>Login Page</h1>
+            <div>Email</div>
+            <input type="text" placeholder="Enter email" name="email" onblur="validateEmail(this)" id="email"/>
+            <div>Password</div>
+            <input type="password" placeholder="Enter password" name="password" onkeyup="validatePassword(this)" id="password"/>
+            <div class="checkbox">
+                <label><input type="checkbox" id="savedata()"/> Remember me</label>
+            </div> 
+            <button onClick="login()">Login</button> 
+        </div>
+       
+    </div>
+    <script>
+        const validateEmail = (e) => {
+            const reg = /^[a-z0-9._]+@[a-z]+\.(com|in|co.in|org|edu|asia)$/i;
+            if (reg.test(e.value)) {
+                e.className = "y";
+            } else {
+                e.className = "x";
+            }
+        }
+      
+        const validatePassword = (e) => {
+            const passwordHint = document.getElementById("password");
+            if (e.value.length >= 6) {
+                passwordHint.style.color = "green";
+            } else {
+                passwordHint.style.color = "red";
+            }
+        }
+        
+
+        
+
+        const login = () => {
+            const emailInput = document.getElementById("email");
+            const passwordInput = document.getElementById("password");
+            const isEmailValid = emailInput.className === "y";
+            const isPasswordValid = passwordInput.value.length >= 6;
+
+            if (isEmailValid && isPasswordValid) {
+                document.getElementById("success-message").innerHTML="Login is Successfull"
+                document.getElementById("success-message").style.color="green"
+            }
+            else{
+                document.getElementById("success-message").innerHTML="check the email and password"
+                document.getElementById("success-message").style.color="red"
+
+            }
+            emailInput.value=''
+            passwordInput.value=''
+            emailInput.className=''
+            
+        }
+    </script>
+</body>
+</html>
